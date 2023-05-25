@@ -6,5 +6,11 @@ pipeline{
         echo 'code has been checkout'
       }
     }
+    stage('Building the Project'){
+      steps{
+        echo 'Building the Project'
+        sh 'mvn clean install -DskipTests'
+      }
+    }
   }
 }
