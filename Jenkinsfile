@@ -12,6 +12,17 @@ pipeline{
         sh 'mvn clean install -DskipTests'
       }
     }
+    stage('codequality analyzing'){
+      steps{
+        sh '''
+        mvn clean verify sonar:sonar \
+          -Dsonar.projectKey=Mobilestore \
+          -Dsonar.projectName='Mobilestore' \
+          -Dsonar.host.url=http://20.12.44.193:9000 \
+          -Dsonar.token=sqp_88cb3f7b4cebf083bfd4b4ccf8bac8adf2f63d31
+          '''
+      }
+    }
     stage('building the docker image'){
       steps{
         echo 'build the docker image'
