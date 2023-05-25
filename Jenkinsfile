@@ -21,6 +21,7 @@ pipeline{
     stage('deploying in to dev env'){
       steps{
         echo 'Deployment to the developer enviroment'
+        sh 'docker rm -f mobilestore || true '
         sh 'docker run -d --name=mobilestore -p 8099:8099 mobilestore'
       }
     }
