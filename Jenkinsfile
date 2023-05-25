@@ -12,5 +12,11 @@ pipeline{
         sh 'mvn clean install -DskipTests'
       }
     }
+    stges('building the docker image'){
+      steps{
+        echo 'build the docker image'
+        sh 'docker build -t mobilestore .'
+      }
+    }
   }
 }
