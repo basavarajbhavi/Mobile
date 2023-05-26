@@ -52,7 +52,7 @@ pipeline{
       steps{
         echo "eployment to the developer enviroment"
         sh 'docker rm -f mobilestore-amadeus || true'
-        sh 'docker run -d --name=mobilestore-amadeus -p 8099:8099 skillassure/mobilestore-amadeus:19'
+        sh 'docker run -d --name=mobilestore-amadeus -p 8099:8099 skillassure/mobilestore-amadeus'
       }
     }
   }
