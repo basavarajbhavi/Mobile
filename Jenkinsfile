@@ -39,7 +39,7 @@ pipeline{
     }
     stage('push the image to dockerhub'){
       steps{
-        echo "pushing the docker image to skillassure docker hub account"\
+        echo "pushing the docker image to skillassure docker hub account"
         script{
           docker.withRegistry(",registryCredential"){
             dockerImage.push()
