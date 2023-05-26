@@ -41,7 +41,7 @@ pipeline{
       steps{
         echo "pushing the docker image to skillassure docker hub account"
         script{
-          docker.withRegistry(",registryCredential"){
+          docker.withRegistry('',registryCredential){
             dockerImage.push()
             dockerImage.push('$BUILD_NUMBER')
           }
