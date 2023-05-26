@@ -1,5 +1,5 @@
 pipeline{
-  enviroment{
+  environment{
     registry = "skillassure/mobilestore-amadeus"
     registryCredential = "docker_hub_Auth"
     dockerImage = ""
