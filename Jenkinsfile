@@ -1,4 +1,9 @@
 pipeline{
+  enviroment{
+    registry = "skillassure/mobilestore-amadeus"
+    registryCredential = "docker_hub_Auth"
+    dockerImage = ""
+  }
   agent any
   stages{
     stage('Checkout the code from SCM'){
@@ -26,14 +31,28 @@ pipeline{
     stage('building the docker image'){
       steps{
         echo 'build the docker image'
-        sh 'docker build -t mobilestore .'
+        script{
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+        
+      }
+    }
+    stage('push the image to dockerhub'){
+      steps{
+        echo "pushing the docker image to skillassure docker hub account"\
+        script{
+          docker.withRegistry(",registryCredential"){
+            dockerImage.push()
+            dockerImage.push('$BUILD_NUMBER')
+          }
+        }
       }
     }
     stage('deploying in to dev env'){
       steps{
         echo 'Deployment to the developer enviroment'
-        sh 'docker rm -f mobilestore || true '
-        sh 'docker run -d --name=mobilestore -p 8099:8099 mobilestore'
+        sh 'docker rm -f mobilestore-amadeus || true '
+        sh 'docker run -d --name=mobilestore-amadeus -p 8099:8099 mobilestore-amadeus'
       }
     }
   }
