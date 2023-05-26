@@ -50,9 +50,9 @@ pipeline{
     }
     stage('deploying in to dev env'){
       steps{
-        echo 'Deployment to the developer enviroment'
+        echo "eployment to the developer enviroment"
         sh 'docker rm -f mobilestore-amadeus || true'
-        sh 'docker run -d --name=mobilestore-amadeus -p 8099:8099 skillassure/mobilestore-amadeus'
+        sh 'docker run -d --name=mobilestore-amadeus -p 8099:8099 skillassure/mobilestore-amadeus:19'
       }
     }
   }
